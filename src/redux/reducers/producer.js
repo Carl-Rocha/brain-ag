@@ -1,4 +1,6 @@
-const INITIAL_STATE = [{ cpf:'alfredinho',name:'alfredinho2' }]
+import initialState from "../initialState"
+
+const INITIAL_STATE = initialState.producers
 
 const reducers = (state=INITIAL_STATE, action) => {
     switch (action.type) {

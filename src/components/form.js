@@ -4,6 +4,7 @@ import { addProducer } from "../redux/actions/producer";
 import * as Yup from 'yup';
 
 
+
 const Form = () => {
   const dispatch = useDispatch();
   const name = useRef();
@@ -20,9 +21,6 @@ const Form = () => {
     name: Yup.string().required('Nome é obrigatório'),
     city: Yup.string().required('Cidade é obrigatória'),
     state: Yup.string().required('Estado é obrigatório'),
-    farmTotal: Yup.number().min(0, 'Área total da fazenda deve ser um número maior ou igual a 0').required('Área total da fazenda é obrigatória'),
-    arableLand: Yup.number().min(0, 'Área agricultável deve ser um número maior ou igual a 0').required('Área agricultável é obrigatória'),
-    vegetationArea: Yup.number().min(0, 'Área de vegetação deve ser um número maior ou igual a 0').required('Área de vegetação é obrigatória'),
     crops: Yup.string().required('Culturas plantadas é obrigatório'),
     sum: Yup.number().test('sum', 'A soma de área agrícultável e vegetação não pode ser maior que a área total da fazenda', function(value) {
       return value <= this.parent.farmTotal;
@@ -57,7 +55,8 @@ const Form = () => {
   };
 
   return (
-    <form>
+    <div>
+        
       Produtor:
 
       <div>
@@ -87,7 +86,8 @@ const Form = () => {
       <button onClick={handleSave}>
         Salvar
       </button>
-    </form>
+      
+    </div>
 
     )
 

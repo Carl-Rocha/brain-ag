@@ -2,7 +2,11 @@ import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addProducer } from "../redux/actions/producer";
 import * as Yup from 'yup';
-
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 
 const Form = () => {
@@ -55,39 +59,127 @@ const Form = () => {
   };
 
   return (
-    <div>
-        
-      Produtor:
-
-      <div>
-        Nome: <input ref={name} type="text" />
-      </div>
-      <div>
-        CPF: <input ref={cpf} size="11" type="number" />
-      </div>
-      <div>
-        Cidade: <input ref={city} type="text" />
-      </div>
-      <div>
-        Estado: <input ref={state} type="text" />
-      </div>
-      <div>
-        Área total em hectares da fazenda: <input ref={farmTotal} type="number" />
-      </div>
-      <div>
-        Área agricultável em hectares: <input ref={arableLand} type="number" />
-      </div>
-      <div>
-        Área de vegetação em hectares: <input ref={vegetationArea} type="number" />
-      </div>
-      <div>
-        Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar): <input ref={crops} type="text" />
-      </div>
-      <button onClick={handleSave}>
-        Salvar
-      </button>
-      
-    </div>
+    
+      <Container component="main" maxWidth="xl" >
+         <Box component="form" onSubmit={handleSave} noValidate sx={{ mt: 1 }}>
+        <Box>
+        <Typography component="h1" variant="h5" align="center">Produtor </Typography>
+      <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+              inputRef={name}
+            
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="cpf"
+              label="cpf"
+              name="cpf"
+              autoComplete="cpf"
+              autoFocus
+              inputRef={cpf}
+              inputProps={{
+                maxLength: 14,
+                type:"number"
+              }}
+            />
+      <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Cidade"
+              label="Cidade"
+              name="Cidade"
+              autoComplete="Cidade"
+              autoFocus
+              inputRef={city}
+            
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Estado"
+              label="Estado"
+              name="Estado"
+              autoComplete="Estado"
+              autoFocus
+              inputRef={state}
+            
+            />
+             <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Área total em hectares da fazenda"
+              label="Área total em hectares da fazenda"
+              name="Área total em hectares da fazenda"
+              autoComplete="Área total em hectares da fazenda"
+              autoFocus
+              inputRef={farmTotal}
+              inputProps={{
+                type:"number"
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Área agricultável em hectares"
+              label="Área agricultável em hectares"
+              name="Área agricultável em hectares"
+              autoComplete="Área agricultável em hectares"
+              autoFocus
+              inputRef={arableLand}
+              inputProps={{
+                type:"number"
+              }}
+            />
+             <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Área de vegetação em hectares"
+              label="Área de vegetação em hectares"
+              name="Área de vegetação em hectares"
+              autoComplete="Área de vegetação em hectares"
+              autoFocus
+              inputRef={vegetationArea}
+              inputProps={{
+                type:"number"
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar)"
+              label="Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar)"
+              name="Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar)"
+              autoComplete="Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar)"
+              autoFocus
+              inputRef={crops}
+            />
+      <Button
+              
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+            Salvar
+            </Button>
+            </Box>
+      </Box>
+    </Container>
 
     )
 

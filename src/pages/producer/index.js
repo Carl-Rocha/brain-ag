@@ -1,19 +1,21 @@
 import React from "react"
 import Form from "../../components/form" 
-import { useSelector} from "react-redux"
-import List from "../../components/list"
-
+import Container from '@mui/material/Container';
+import Producers from "../../components/producers";
  
 
-const Producer = () => {
-    const { producer } = useSelector(state => state)
-    return <div>
+const Producer = () => (
+    <Container component="main" maxWidth="xl" sx={{
+        bgcolor: 'background.paper',
+        boxShadow: 1,
+        borderRadius: 2,
+        p: 2,
+        minWidth: 300,
+        display:'inline-flex'
+      }}>
         <Form />
-        produtores cadastrados:
-        { producer?.map((item, index) => (<div key={`producer-${index}`}>
-            <List item={item}/>
-            </div>))}
-        </div>
-} 
+        <Producers />
+    </Container>
+)
 
 export default Producer

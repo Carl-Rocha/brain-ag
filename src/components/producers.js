@@ -8,8 +8,8 @@ import { useNavigate} from 'react-router-dom'
 const Producers = () => {
     const { producer } = useSelector(state => state)
     const navigate = useNavigate();
+    
     return <Container component="main" maxWidth="md">
-        
         <Typography component="h1" variant="h5" align="center"> Produtores Cadastrados</Typography>
         { producer?.map((item, index) => (<Box key={`producer-${index}`}>
             <List item={item}/>

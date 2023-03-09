@@ -33,7 +33,8 @@ const Form = () => {
     })
   });
 
-  const handleSave = () => {
+  const handleSave = (event) => {
+    event.preventDefault()
     schema.validate({
       cpf: cpf.current.value,
       name: name.current.value,
@@ -55,6 +56,14 @@ const Form = () => {
         vegetationArea:vegetationArea.current.value,
         crops:crops.current.value 
       }));
+      cpf.current.value=''
+      name.current.value=''
+      city.current.value=''
+      state.current.value=''
+      farmTotal.current.value=''
+      arableLand.current.value=''
+      vegetationArea.current.value=''
+      crops.current.value=''
     }).catch((err) => {
       alert(err.message);
     });

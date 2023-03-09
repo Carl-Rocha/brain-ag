@@ -1,7 +1,7 @@
 import React, { useRef,useState } from "react"
 import { useDispatch } from "react-redux"
 import { removeProducer,updateProducer } from "../redux/actions/producer"
-import { Typography,ListItem,ListItemText,TextField,Box  } from '@mui/material'
+import { ListItem,TextField,Box  } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
@@ -39,8 +39,11 @@ const List = ({item}) => {
         )) 
     } 
     return (
-
-        <ListItem
+      <>
+      <Box>
+       {item.name}
+      </Box>
+      <ListItem
   
       secondaryAction={
         <>
@@ -63,12 +66,9 @@ const List = ({item}) => {
         </>
       }
     >
-      <ListItemText
-        primary={item.name}
-        secondary={
-          <>
+      
+      <>
             <Box component="form" sx={{ '& > *': { m: 1 } }}>
-      <Typography variant="h6">Editar Produtor</Typography>
       <TextField
         disabled={!enabled}
         label="Nome"
@@ -136,9 +136,9 @@ const List = ({item}) => {
       
     </Box>
           </>
-        }
-      />
+
     </ListItem>
+    </>
       
 
         

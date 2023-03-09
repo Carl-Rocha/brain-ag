@@ -23,7 +23,6 @@ const initialState = {
       crops: ['Café', 'Cana de Açúcar'],
     },
   ],
-  // outras propriedades do estado podem ser definidas aqui
 };
 
 export default initialState;

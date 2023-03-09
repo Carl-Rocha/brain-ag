@@ -9,9 +9,11 @@ const reducers = (state=INITIAL_STATE, action) => {
         case 'REMOVE_PRODUCER':
             return state.filter(producer => producer.cpf !== action.cpf)
         case 'UPDATE_PRODUCER':
-            return state.filter(producer => producer.cpf !== action.cpf).concat([
-                action.producer
-            ])
+            return state.forEach((el, index) => {
+                if (el.cpf === action.cpf) {
+                    state[index] = action.producer
+                }
+            })
         default:
             return state
     }  

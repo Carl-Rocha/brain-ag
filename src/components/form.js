@@ -7,10 +7,12 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { useNavigate} from 'react-router-dom'
 
 
 const Form = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const name = useRef();
   const cpf = useRef();
   const city = useRef();
@@ -60,7 +62,7 @@ const Form = () => {
 
   return (
     
-      <Container component="main" maxWidth="xl" >
+      <Container component="main" maxWidth="xl" align="center" >
          <Box component="form" onSubmit={handleSave} noValidate sx={{ mt: 1 }}>
         <Box>
         <Typography component="h1" variant="h5" align="center">Produtor </Typography>
@@ -179,6 +181,16 @@ const Form = () => {
             </Button>
             </Box>
       </Box>
+      <Button
+              
+              type="button"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick= {() => navigate("/producers")}
+            >
+            Ver Produtores
+            </Button>
     </Container>
 
     )

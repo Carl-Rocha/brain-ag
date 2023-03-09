@@ -1,9 +1,10 @@
-import React, { useRef } from "react"
+import React, { useRef,useState } from "react"
 import { useDispatch } from "react-redux"
 import { removeProducer,updateProducer } from "../redux/actions/producer"
 import { Typography,ListItem,ListItemText,TextField,Box  } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
+import CheckIcon from '@mui/icons-material/Check';
  
 const List = ({item}) => {
     const dispatch = useDispatch()
@@ -15,6 +16,7 @@ const List = ({item}) => {
     const arableLand = useRef()
     const vegetationArea = useRef()
     const crops = useRef()
+    const [enabled, setEnabled] = useState(false)
     const handleRemove =(cpf) => {
         dispatch(removeProducer(
             cpf
@@ -45,9 +47,19 @@ const List = ({item}) => {
           <ClearIcon onClick={() => handleRemove(item.cpf)} aria-label="delete">
             <ClearIcon />
           </ClearIcon>
-          <EditIcon onClick={() => handleUpdate(item)} aria-label="edit">
+          {
+            enabled ?
+            <CheckIcon onClick={() => {
+              setEnabled(false)
+              handleUpdate(item.cpf)
+            }} aria-label="edit">
+            <CheckIcon />
+           </CheckIcon>
+            :
+            <EditIcon onClick={() => setEnabled(true)} aria-label="edit">
             <EditIcon />
           </EditIcon>
+          }
         </>
       }
     >
@@ -58,6 +70,7 @@ const List = ({item}) => {
             <Box component="form" sx={{ '& > *': { m: 1 } }}>
       <Typography variant="h6">Editar Produtor</Typography>
       <TextField
+        disabled={!enabled}
         label="Nome"
         inputRef={name}
         defaultValue={item.name}
@@ -65,6 +78,7 @@ const List = ({item}) => {
         size="small"
       />
       <TextField
+        disabled={!enabled}
         label="CPF"
         inputRef={cpf}
         defaultValue={item.cpf}
@@ -72,6 +86,7 @@ const List = ({item}) => {
         size="small"
       />
       <TextField
+        disabled={!enabled}
         label="Cidade"
         inputRef={city}
         defaultValue={item.city}
@@ -79,6 +94,7 @@ const List = ({item}) => {
         size="small"
       />
       <TextField
+        disabled={!enabled}
         label="Estado"
         inputRef={state}
         defaultValue={item.state}
@@ -86,6 +102,7 @@ const List = ({item}) => {
         size="small"
       />
       <TextField
+        disabled={!enabled}
         label="Fazenda"
         inputRef={farmTotal}
         defaultValue={item.farmTotal}
@@ -93,6 +110,7 @@ const List = ({item}) => {
         size="small"
       />
       <TextField
+        disabled={!enabled}
         label="Área"
         inputRef={arableLand}
         defaultValue={item.arableLand}
@@ -100,6 +118,7 @@ const List = ({item}) => {
         size="small"
       />
       <TextField
+        disabled={!enabled}
         label="Área de Vegetação"
         inputRef={vegetationArea}
         defaultValue={item.vegetationArea}
@@ -107,6 +126,7 @@ const List = ({item}) => {
         size="small"
       />
       <TextField
+        disabled={!enabled}
         label="Culturas"
         inputRef={crops}
         defaultValue={item.crops}

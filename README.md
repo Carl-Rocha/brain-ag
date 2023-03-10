@@ -4,7 +4,7 @@ Este repositório é parte do processo seletivo do Serasa
 
 ### Instalando
 
-- Baixe o repositório [here](https://github.com/Carl-Rocha/brain-ag/archive/main.zip) OU
+- Baixe o repositório [aqui](https://github.com/Carl-Rocha/brain-ag/archive/main.zip) OU
 - Clone o projeto - `git@github.com:Carl-Rocha/brain-ag.git`
 
 - Execute `npm install` para instalar as dependências

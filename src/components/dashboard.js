@@ -14,7 +14,7 @@ const Dashboard = () => {
           <Farms />
         </Grid>
       <Grid container spacing={2}>
-      <Grid item xs={12}>
+      <Grid item xs={6}>
           <Box sx={{
         width: 394,
         height: 394,
@@ -25,8 +25,10 @@ const Dashboard = () => {
         <Grid item xs={6}>
           <SoilUseChart />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}justifyContent="center" display="flex">
+          <Grid item xs={6}>
           <Farming />
+          </Grid>
         </Grid>
       </Grid>
   

@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import InputMask from 'react-input-mask';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProducer } from "../redux/actions/producer";
 import * as Yup from 'yup';
 import { Container, Box, Typography, Button, TextField,InputAdornment} from '@mui/material';
@@ -19,9 +19,17 @@ const Form = () => {
   const arableLand = useRef();
   const vegetationArea = useRef();
   const crops = useRef();
+  const [docValue, setDocValue] = useState('');
+  const { producer } = useSelector(state => state)
 
-  const schema = Yup.object().shape({
-    cpf: Yup.string().length(14, 'CPF deve ter exatamente 11 caracteres').required('CPF é obrigatório'),
+const schema = Yup.object().shape({
+  cpf: Yup.string().required('CPF/CNPJ é obrigatório').test('isValid', 'CPF ou CNPJ é inválido', (value) => {
+    let doc = value.replace(/([^0-9])+/g, "");
+    if (doc?.length === 11 || doc?.length === 14) {
+      return !producer.find((item) => item.cpf.replace(/([^0-9])+/g, "") === doc);
+    }
+    return false;
+  }),
     name: Yup.string().required('Nome é obrigatório'),
     city: Yup.string().required('Cidade é obrigatória'),
     state: Yup.string().required('Estado é obrigatório'),
@@ -34,7 +42,7 @@ const Form = () => {
   const handleSave = (event) => {
     event.preventDefault()
     schema.validate({
-      cpf: cpf.current.value,
+      cpf: docValue,
       name: name.current.value,
       city: city.current.value,
       state: state.current.value,
@@ -45,7 +53,7 @@ const Form = () => {
       sum: Number(arableLand.current.value) + Number(vegetationArea.current.value)
     }).then(() => {
       dispatch(addProducer({
-        cpf:cpf.current.value,
+        cpf:docValue,
         name:name.current.value,
         city:city.current.value,
         state:state.current.value, 
@@ -54,7 +62,7 @@ const Form = () => {
         vegetationArea:vegetationArea.current.value,
         crops:crops.current.value.toLowerCase(),
       }));
-      cpf.current.value=''
+      setDocValue('')
       name.current.value=''
       city.current.value=''
       state.current.value=''
@@ -90,19 +98,20 @@ const Form = () => {
               required
               fullWidth
               id="cpf"
-              label="CPF"
+              label="CPF/CNPJ"
               name="cpf"
               autoComplete="cpf"
               autoFocus
               inputRef={cpf}
-              inputProps={{
-                inputMode: 'numeric',
-                maxLength: 14,
-              }}
               InputProps={{
+                inputMode: 'numeric',
+                maxLength: 18,
                 inputComponent: InputMask,
                 inputProps: {
-                  mask: '999.999.999-99',
+                  mask: docValue.length > 14 ?  '99.999.999/9999-99' : '999.999.999-999',
+                  maskChar: "",
+                  value: docValue,
+                  onChange:(e) => setDocValue(e.target.value)
                 },
               }}
             />

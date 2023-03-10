@@ -18,10 +18,11 @@ const List = ({item}) => {
     const vegetationArea = useRef()
     const crops = useRef()
     const [enabled, setEnabled] = useState(false)
+    const [docValue, setDocValue] = useState('');
 
     useEffect(() => {
       name.current.value = item.name
-      cpf.current.value = item.cpf
+      setDocValue(item.cpf)
       city.current.value = item.city
       state.current.value = item.state
       farmTotal.current.value = item.farmTotal
@@ -42,7 +43,7 @@ const List = ({item}) => {
         dispatch(updateProducer(
             id,
             {
-                cpf:cpf.current.value,
+                cpf:docValue,
                 name:name.current.value,
                 city:city.current.value,
                 state:state.current.value, 
@@ -106,7 +107,10 @@ const List = ({item}) => {
           maxLength: 14,
           inputComponent: InputMask,   
           inputProps: {
-            mask: '999.999.999-99',
+            mask: docValue.length > 14 ?  '99.999.999/9999-99' : '999.999.999-999',
+            maskChar: "",
+            value: docValue,
+            onChange:(e) => setDocValue(e.target.value)
           },
         }}
       />

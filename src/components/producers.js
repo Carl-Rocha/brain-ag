@@ -24,6 +24,16 @@ const Producers = () => {
             >
             Adicionar Produtor
             </Button>
+            <Button
+              
+              type="button"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick= {() => navigate("/dashboard")}
+            >
+            Ver Dashboard
+            </Button>
         </Container>
         
     }

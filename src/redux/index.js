@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import { routerMiddleware } from "connected-react-router";
+import { createRouterMiddleware } from '@lagunovsky/redux-react-router'
 import { createBrowserHistory } from "history";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -22,7 +22,7 @@ const store = createStore(
     persistedReducer,
     composeEnhancer(
         applyMiddleware(
-            routerMiddleware(history),
+            createRouterMiddleware(history),
         )
     )
 );

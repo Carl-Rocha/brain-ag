@@ -2,7 +2,7 @@ import React from "react"
 import { Routes, Route } from 'react-router-dom';
 import Form from './components/form'
 import Producers from './components/producers'
-import Dashboard from './components/dashboard'
+import Dashboard from './components/dashboard';
 
 
 

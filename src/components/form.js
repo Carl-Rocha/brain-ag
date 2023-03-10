@@ -1,13 +1,11 @@
 import React, { useRef } from "react";
+import InputMask from 'react-input-mask';
 import { useDispatch } from "react-redux";
 import { addProducer } from "../redux/actions/producer";
 import * as Yup from 'yup';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { Container, Box, Typography, Button, TextField,InputAdornment} from '@mui/material';
 import { useNavigate} from 'react-router-dom'
+
 
 
 const Form = () => {
@@ -23,7 +21,7 @@ const Form = () => {
   const crops = useRef();
 
   const schema = Yup.object().shape({
-    cpf: Yup.string().length(11, 'CPF deve ter exatamente 11 caracteres').required('CPF é obrigatório'),
+    cpf: Yup.string().length(14, 'CPF deve ter exatamente 11 caracteres').required('CPF é obrigatório'),
     name: Yup.string().required('Nome é obrigatório'),
     city: Yup.string().required('Cidade é obrigatória'),
     state: Yup.string().required('Estado é obrigatório'),
@@ -54,7 +52,7 @@ const Form = () => {
         farmTotal:farmTotal.current.value,
         arableLand:arableLand.current.value, 
         vegetationArea:vegetationArea.current.value,
-        crops:crops.current.value 
+        crops:crops.current.value.toLowerCase(),
       }));
       cpf.current.value=''
       name.current.value=''
@@ -71,16 +69,16 @@ const Form = () => {
 
   return (
     
-      <Container component="main" maxWidth="xl" align="center" >
+      <Container component="main" maxWidth="xs" align="center" >
          <Box component="form" onSubmit={handleSave} noValidate sx={{ mt: 1 }}>
         <Box>
-        <Typography component="h1" variant="h5" align="center">Produtor </Typography>
+        <Typography component="h1" variant="h5" align="center">Cadastro de Produtores </Typography>
       <TextField
               margin="normal"
               required
               fullWidth
               id="name"
-              label="name"
+              label="Nome"
               name="name"
               autoComplete="name"
               autoFocus
@@ -92,17 +90,23 @@ const Form = () => {
               required
               fullWidth
               id="cpf"
-              label="cpf"
+              label="CPF"
               name="cpf"
               autoComplete="cpf"
               autoFocus
               inputRef={cpf}
               inputProps={{
+                inputMode: 'numeric',
                 maxLength: 14,
-                type:"number"
+              }}
+              InputProps={{
+                inputComponent: InputMask,
+                inputProps: {
+                  mask: '999.999.999-99',
+                },
               }}
             />
-      <TextField
+            <TextField
               margin="normal"
               required
               fullWidth
@@ -131,53 +135,55 @@ const Form = () => {
               required
               fullWidth
               id="Área total em hectares da fazenda"
-              label="Área total em hectares da fazenda"
+              label="Área total da fazenda"
               name="Área total em hectares da fazenda"
               autoComplete="Área total em hectares da fazenda"
               autoFocus
               inputRef={farmTotal}
-              inputProps={{
-                type:"number"
-              }}
+              InputProps={{
+                type:"tel",
+                endAdornment: <InputAdornment position="start" disabled >ha</InputAdornment>}}
             />
             <TextField
               margin="normal"
               required
               fullWidth
               id="Área agricultável em hectares"
-              label="Área agricultável em hectares"
+              label="Área agricultável "
               name="Área agricultável em hectares"
               autoComplete="Área agricultável em hectares"
               autoFocus
+              type="tel"
               inputRef={arableLand}
-              inputProps={{
-                type:"number"
-              }}
+              InputProps={{
+                inputMode: 'numeric', pattern: '[0-9]*',
+                endAdornment: <InputAdornment position="start" disabled >ha</InputAdornment>}}
             />
              <TextField
               margin="normal"
               required
               fullWidth
               id="Área de vegetação em hectares"
-              label="Área de vegetação em hectares"
+              label="Área de vegetação "
               name="Área de vegetação em hectares"
               autoComplete="Área de vegetação em hectares"
               autoFocus
               inputRef={vegetationArea}
-              inputProps={{
-                type:"number"
-              }}
+              InputProps={{
+                type:"tel",
+                endAdornment: <InputAdornment position="start" disabled >ha</InputAdornment>}}
             />
-            <TextField
+             <TextField
               margin="normal"
               required
               fullWidth
-              id="Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar)"
-              label="Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar)"
-              name="Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar)"
-              autoComplete="Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar)"
+              id="crops"
+              label="Culturas plantadas (separe por vírgula)"
+              name="crops"
+              autoComplete="crops"
               autoFocus
               inputRef={crops}
+              helperText="Digite as culturas plantadas separadas por vírgula (ex: Soja, Milho, Algodão)"
             />
       <Button
               
@@ -199,6 +205,16 @@ const Form = () => {
               onClick= {() => navigate("/producers")}
             >
             Ver Produtores
+            </Button>
+            <Button
+              
+              type="button"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick= {() => navigate("/dashboard")}
+            >
+            Ver Dashboard
             </Button>
     </Container>
 

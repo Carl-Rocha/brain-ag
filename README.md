@@ -12,7 +12,7 @@ Este repositório é parte do processo seletivo do Serasa
 
 Abra [http://localhost:3000](http://localhost:3000) para ver no navegador.
 
-## Built With
+## Desenvolvido com 
 
 - [ReactJS](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
